@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load Chart.js -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <h1>Fitness Tracker</h1>
+
+        <!-- Add Workout Section -->
+        <div class="add-workout">
+            <h2>Add Workout To Track Your Calories Burnt</h2>
+            <input type="text" id="workout-name" placeholder="Workout Name">
+            <input type="number" id="calories-burned" placeholder="Calories Burned">
+            <button id="add-workout-btn">Add Workout</button>
+        </div>
+
+        <!-- Total Calories -->
+        <h3 id="total-calories">Total Calories Burned: 0</h3>
+
+        <!-- Workouts List -->
+        <div class="workout-list">
+            <h2>Your Workouts</h2>
+            <ul id="workout-items"></ul>
+        </div>
+
+        <!-- Calories Burned Chart -->
+        <div class="chart-container">
+            <h2>Calories Burned Chart</h2>
+            <canvas id="caloriesChart"></canvas>
+        </div>
+
+        <!-- Progress Badge System -->
+        <div id="badge-section">
+            <h2>Your Achievements</h2>
+            <div class="badge-container">
+                <span class="badge" id="badge-hydration" style="display:none;">🏅 Hydration Master</span>
+                <span class="badge" id="badge-calorie" style="display:none;">🔥 Calorie Crusher</span>
+                <span class="badge" id="badge-streak" style="display:none;">🏋️ Workout Streak</span>
+            </div>
+        </div>
+
+        <!-- New Trackers Section -->
+        <div class="additional-trackers">
+            <!-- Water Goals Section -->
+            <div class="water-goals">
+                <h2>Water Intake Tracker</h2>
+                <p id="water-intake-status">0 / 8 Glasses</p>
+                <button id="add-water-btn">Add a Glass</button>
+                <progress id="water-progress" value="0" max="8"></progress>
+            </div>
+
+            <!-- BMI Calculator Section -->
+            <div class="bmi-calculator">
+                <h2>BMI Calculator</h2>
+                <input type="number" id="weight-input" placeholder="Weight (kg)">
+                <input type="number" id="height-input" placeholder="Height (cm)">
+                <button id="calculate-bmi-btn">Calculate BMI</button>
+                <p id="bmi-result">Your BMI: --</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js" type="module"></script>
+
+    <script type="module">
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyASiih6kfJVkJxe9tIWK0qo0hrsaZQHnQA",
+            authDomain: "track-to-fit---fitness-tracker.firebaseapp.com",
+            projectId: "track-to-fit---fitness-tracker",
+            storageBucket: "track-to-fit---fitness-tracker.appspot.com",
+            messagingSenderId: "211949186700",
+            appId: "1:211949186700:web:da8951580495c671c6d5a9"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // References to the DOM elements
+        const workoutNameInput = document.getElementById('workout-name');
+        const caloriesBurnedInput = document.getElementById('calories-burned');
+        const workoutList = document.getElementById('workout-items');
+        const totalCaloriesElement = document.getElementById('total-calories');
+
+        // Water Intake Tracker logic
+        let waterIntake = 0;
+        document.getElementById('add-water-btn').addEventListener('click', function () {
+            if (waterIntake < 8) {
+                waterIntake++;
+                document.getElementById('water-intake-status').textContent = `${waterIntake} / 8 Glasses`;
+                document.getElementById('water-progress').value = waterIntake;
+            }
+            checkBadges(); // Check badges after adding water intake
+        });
+
+        // BMI Calculator logic
+        document.getElementById('calculate-bmi-btn').addEventListener('click', function () {
+            const weight = parseFloat(document.getElementById('weight-input').value);
+            const height = parseFloat(document.getElementById('height-input').value) / 100; // Convert cm to meters
+            if (weight > 0 && height > 0) {
+                const bmi = (weight / (height * height)).toFixed(2);
+                document.getElementById('bmi-result').textContent = `Your BMI: ${bmi}`;
+            }
+        });
+
+        // Function to update the chart
+        function updateChart() {
+            caloriesChart.update();
+        }
+
+        // Badge System Logic: Check if user qualifies for any badges
+        function checkBadges() {
+            if (waterIntake >= 8) {
+                document.getElementById('badge-hydration').style.display = 'inline-block';
+            }
+            if (totalCalories >= 500) {
+                document.getElementById('badge-calorie').style.display = 'inline-block';
+            }
+        }
+
+        // Add workout button event
+        document.getElementById('add-workout-btn').addEventListener('click', async function () {
+            const workoutName = workoutNameInput.value;
+            const caloriesBurned = parseInt(caloriesBurnedInput.value);
+
+            if (workoutName && caloriesBurned > 0) {
+                await db.collection('workouts').add({
+                    name: workoutName,
+                    calories: caloriesBurned,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${workoutName} - ${caloriesBurned} Calories <span class="delete-btn">X</span>`;
+                workoutList.appendChild(listItem);
+
+                listItem.querySelector('.delete-btn').addEventListener('click', async function () {
+                    const workoutRef = await db.collection('workouts')
+                        .where('name', '==', workoutName)
+                        .limit(1)
+                        .get();
+
+                    workoutRef.forEach(async doc => {
+                        await db.collection('workouts').doc(doc.id).delete();
+                    });
+
+                    listItem.remove();
+                    totalCalories -= caloriesBurned;
+                    totalCaloriesElement.textContent = `Total Calories Burned: ${totalCalories}`;
+                    updateChart();
+                    checkBadges();
+                });
+
+                totalCalories += caloriesBurned;
+                totalCaloriesElement.textContent = `Total Calories Burned: ${totalCalories}`;
+                workoutLabels.push(workoutName);
+                workoutData.push(caloriesBurned);
+                updateChart();
+                checkBadges();
+            }
+
+            workoutNameInput.value = '';
+            caloriesBurnedInput.value = '';
+        });
+
+        window.onload = checkBadges;
+    </script>
+
+</body>
+
+</html>

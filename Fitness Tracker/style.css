@@ -1,0 +1,423 @@
+/* Introductory Page Styling */
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    background: url("Background Image.jpg") no-repeat center center/cover; /* Set background image */
+    text-align: center;
+    color: #fff;
+    position: relative;
+    padding-top: 70px; /* Add padding for the navbar */
+}
+
+
+/* Text shadow for clarity */
+.intro-container h1,
+.intro-container p {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add a dark shadow behind the text */
+}
+
+.intro-container h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.intro-container p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.intro-image {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-start {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+    background-color: #ff3b3b;
+}
+
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sans-Serif', Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.intro-container h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.intro-container p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.intro-image {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-start {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+    background-color: #45e545;
+}
+
+/* Dashboard Page Styling */
+.dashboard-container {
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.dashboard-container h1 {
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Layout for Fitness Inputs */
+/* Dashboard container */
+.dashboard-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Add workout section */
+.add-workout input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+.add-workout button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.add-workout button:hover {
+    background-color: #218838;
+}
+
+/* Total calories */
+#total-calories {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+/* Workouts list */
+.workout-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.workout-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    margin: 10px 0;
+    border-left: 5px solid #28a745;
+    border-radius: 5px;
+}
+
+.workout-list li .delete-btn {
+    color: red;
+    cursor: pointer;
+}
+
+/* Chart section */
+.chart-container {
+    margin-top: 30px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+/* Chart Area */
+.chart-container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* Footer Styling (Optional) */
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1em;
+    color: #666;
+}
+/* About Page Styling */
+/* Center the content in the About Us page */
+.about-container {
+    background-color: #000; /* Black background */
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+    height: 100vh;            /* Full viewport height */
+    text-align: center;       /* Center text inside the container */
+    color: white;             /* Text color for visibility on black background */
+}
+
+.about-content {
+    max-width: 800px;         /* Limit the width of the content */
+    margin: auto;
+}
+
+button {
+    background-color: #ff4b4b; /* Red color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #e33b3b; /* Darker red on hover */
+}
+
+
+.btn-start {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+    background-color: #ff3b3b;
+}
+/* Contact Us Page Styling */
+.contact-container {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text for contrast */
+    min-height: 100vh; /* Full viewport height */
+    padding: 40px; /* Padding for spacing */
+}
+
+.contact-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.contact-container p, .contact-container form {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #fff; /* Ensure form labels and text are white */
+}
+
+.contact-container input, .contact-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-container button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Home Page Styling */
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url('Background\ Image.jpg') no-repeat center center/cover; /* Background image */
+    text-align: center;
+    color: #fff;
+    position: relative;
+    padding-top: 70px; /* Add padding to push content down for navbar */
+}
+
+.intro-container h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.intro-container p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.btn-start {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+    background-color: #ff3b3b;
+}
+html {
+    scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+}
+
+/* Assuming you have a separate style.css file */
+body {
+    background-image: url('Fluorescent Blue.jpg');
+    background-size: cover; /* This ensures the image covers the entire page */
+    background-position: center;
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Makes the background stay fixed on scroll */
+    font-family: 'Sans-Serif', Arial, Helvetica;
+}
+
+/* Optional: You can also target specific elements if you don't want the entire body */
+.dashboard {
+    background-image: url('Fluorescent Blue.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* CSS for Badges */
+#badge-section {
+    margin-top: 20px;
+    text-align: center;
+}
+.badge-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.badge {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 20px;
+    display: none; /* Initially hidden */
+}
+
+/* Style for all buttons */
+button {
+    background-color: #4CAF50;  /* Green color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #45a049;
+}
